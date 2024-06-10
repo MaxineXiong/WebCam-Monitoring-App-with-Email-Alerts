@@ -1,0 +1,30 @@
+<html lang="en">
+    <body>
+        <p>Dear Customer,</p>
+
+        <p>This is an update from your CCTV monitoring system
+        regarding the recent security alert on your monitored
+        area. The individual detected earlier has now left
+        the monitored area.</p>
+
+        <h3>Incident Details:</h3>
+        <ul><li><strong>Incident ID:</strong> %s</li>
+            <li><strong>Time of Entry:</strong> %s</li>
+            <li><strong>Time of Exit:</strong> %s</li>
+            <li><strong>Duration of Stay:</strong> %s minutes</li>
+        </ul>
+
+        <h3>Recommended Action:</h3>
+        <p>Please review this incident to assess the legitimacy
+           of the individual's prolonged presence. If you
+           determine the presence was unauthorized, please contact
+           the security team or the police immediately. If
+           the presence was authorized and poses no threat,
+           no further action is needed.</p>
+
+        <p>Thank you for your attention to this matter.</p>
+
+        <p>Best regards</p>
+        <p>Your Security Camera Monitoring System</p>
+    </body>
+</html>

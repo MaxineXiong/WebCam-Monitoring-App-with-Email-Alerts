@@ -1,0 +1,32 @@
+<html lang="en">
+    <body>
+     <p>Dear Customer,</p>
+
+     <p>I am contacting you regarding a security matter detected by
+         your CCTV system. On %s, an individual entered your monitored
+         area and remained there for an unusually prolonged period,
+         exceeding the typical %s-minute threshold.</p>
+
+     <h3>Immediate Review Required:</h3>
+     <p>Please examine the attached image captured during the incident to
+        determine if this extended presence is authorized. Swift action is
+        crucial to maintain the security of your property.</p>
+
+     <h3>Incident Details:</h3>
+     <ul><li><strong>Incident ID:</strong> %s</li>
+         <li><strong>Time of Entry:</strong> %s</li>
+         <li><strong>Duration of Stay:</strong> More than %s minutes</li>
+     </ul>
+
+     <p>The attached image provides visual confirmation of the individual detected.
+        Your prompt assessment and verification of this event are essential.</p>
+
+     <p>For any concerns or to report suspicious activities, please contact your
+        security team directly.</p>
+
+     <p>Thank you for your immediate attention to this matter.</p>
+
+     <p>Best regards</p>
+     <p>Your Security Camera Monitoring System</p>
+    </body>
+</html>
