@@ -11,7 +11,7 @@ from threading import Thread
 
 
 class WebCam:
-    DURATION_THRESHOLD = 5
+    DURATION_THRESHOLD = 5 * 60
 
     def __init__(self, camera_index=0):
         self.video = cv2.VideoCapture(camera_index)
@@ -25,7 +25,7 @@ class WebCam:
         incident_id = 'incident-' + entry_time.strftime('%Y%m%d-%H%M%S')
         entry_time_str = entry_time.strftime('%b %d, %Y, at %I:%M:%S %p')
         if in_camera:
-            duration_threshold_mins = round(self.DURATION_THRESHOLD/60, 2)
+            duration_threshold_mins = round(self.DURATION_THRESHOLD/60)
             # Define the email subject line for the alert email
             subject = f'Security Alert {incident_id}: Unusual Prolonged Presence Detected'
             # Read the content from the template for alert emails
@@ -44,7 +44,7 @@ class WebCam:
                 body = file.read()
             # Format the email template string to construct the HTML body of the update email
             body = body%(incident_id, entry_time_str, exit_time_str,
-                         round((exit_time - entry_time).seconds/60, 2))
+                         round((exit_time - entry_time).seconds/60))
         # Set up Email account credentials and SMTP server details
         sender_email = "meenoxiong@gmail.com"
         recipient_email = "meeno2b@outlook.com"
