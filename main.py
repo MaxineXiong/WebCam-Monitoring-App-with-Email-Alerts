@@ -11,7 +11,7 @@ from threading import Thread
 
 
 class WebCam:
-    DURATION_THRESHOLD = 5 * 60
+    DURATION_THRESHOLD = 2 * 60
 
     def __init__(self, camera_index=0):
         self.video = cv2.VideoCapture(camera_index)
