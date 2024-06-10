@@ -1,27 +1,29 @@
 import cv2
-import time
 from datetime import datetime
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
+import os
+import glob
+from threading import Thread
 
 
 
 class WebCam:
-    DURATION_THRESHOLD = 5 * 60
+    DURATION_THRESHOLD = 5
 
     def __init__(self, camera_index=0):
         self.video = cv2.VideoCapture(camera_index)
         self.first_frame = None
-        self.statuses = []
+        self.status_list = []
         self.entry_time = None
         self.alert_email_sent = False
 
 
-    def send_email(self, in_camera: bool, attachment_filename: str):
-        incident_id = 'incident-' + self.entry_time.strftime('%Y%m%d-%H%M%S')
-        entry_time_str = self.entry_time.strftime('%b %d, %Y, at %I:%M:%S %p')
+    def send_email(self, entry_time: datetime, in_camera: bool, attachment_filename: str):
+        incident_id = 'incident-' + entry_time.strftime('%Y%m%d-%H%M%S')
+        entry_time_str = entry_time.strftime('%b %d, %Y, at %I:%M:%S %p')
         if in_camera:
             duration_threshold_mins = round(self.DURATION_THRESHOLD/60, 2)
             # Define the email subject line for the alert email
@@ -42,7 +44,7 @@ class WebCam:
                 body = file.read()
             # Format the email template string to construct the HTML body of the update email
             body = body%(incident_id, entry_time_str, exit_time_str,
-                         round((exit_time - self.entry_time).seconds/60, 2))
+                         round((exit_time - entry_time).seconds/60, 2))
         # Set up Email account credentials and SMTP server details
         sender_email = "meenoxiong@gmail.com"
         recipient_email = "meeno2b@outlook.com"
@@ -76,14 +78,26 @@ class WebCam:
 
         # Print a confirmation message after sending an email
         if in_camera:
-            print(f'An alert email containing a captured image of the detected object has been sent to {recipient_email}.')
+            print(f'{incident_id}: An alert email containing a captured image of the detected object has been sent to {recipient_email}.')
         else:
-            print('An update email has been sent to notify that the detected individual has left the monitored area.')
+            print(f'{incident_id}: An update email has been sent to notify that the detected individual has left the monitored area.')
+
+
+    def clean_folder(self):
+        for image in glob.glob('*.jpg'):
+            os.remove(image)
+
+
+    def execute_concurrently_in_background(self, target_process, process_args=()):
+        """Execute a process concurrently in the background
+        """
+        thread = Thread(target=target_process, args=process_args)
+        # Execute the process in the background
+        thread.daemon = True
+        thread.start()
 
 
     def monitor(self):
-        time.sleep(2)
-
         while True:
             status = 0
 
@@ -95,7 +109,7 @@ class WebCam:
 
             if self.first_frame is None:
                 self.first_frame = gray_frame_gau
-                self.statuses.append(status)
+                self.status_list.append(status)
                 continue
 
             delta_frame = cv2.absdiff(self.first_frame, gray_frame_gau)
@@ -112,19 +126,14 @@ class WebCam:
                     cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 3)
                     status = 1
 
-            cv2.imshow('frame with rectangles', frame)
-
-            key = cv2.waitKey(1)
-
-            if key == ord('q'):
-                break
-
-            if (status == 1) and (self.statuses[-1] == 0):
+            if (status == 1) and (self.status_list[-1] == 0):
                 self.entry_time = datetime.now()
-            if (status == 0) and (self.statuses[-1] == 1):
+            if (status == 0) and (self.status_list[-1] == 1):
                 if self.alert_email_sent:
-                    self.send_email(in_camera=False,
-                                    attachment_filename=None)
+                    self.execute_concurrently_in_background(
+                                target_process=self.send_email,
+                                process_args=(self.entry_time, False, None)
+                                )
                     self.alert_email_sent = False
                     self.entry_time = None
 
@@ -136,11 +145,24 @@ class WebCam:
                     if not self.alert_email_sent:
                         file_name = 'detected_object_{}.jpg'.format(current_time.strftime('%Y%m%d%H%M%S'))
                         cv2.imwrite(file_name, frame)
-                        self.send_email(in_camera=True,
-                                        attachment_filename=file_name)
+                        self.execute_concurrently_in_background(
+                                target_process=self.send_email,
+                                process_args=(self.entry_time, True, file_name)
+                                )
                         self.alert_email_sent = True
 
-            self.statuses.append(status)
+            self.status_list.append(status)
+
+            cv2.imshow('Monitoring video with rectangles', frame)
+
+            key = cv2.waitKey(1)
+
+            if key == ord('q'):
+                break
+
+        self.video.release()
+
+        self.clean_folder()
 
 
 
