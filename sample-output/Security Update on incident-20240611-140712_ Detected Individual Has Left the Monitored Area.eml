@@ -1,0 +1,181 @@
+Received: from SY5P282MB4512.AUSP282.PROD.OUTLOOK.COM (2603:10c6:10:271::20)
+ by SY4P282MB3827.AUSP282.PROD.OUTLOOK.COM with HTTPS; Tue, 11 Jun 2024
+ 04:14:01 +0000
+Received: from AS4P192CA0013.EURP192.PROD.OUTLOOK.COM (2603:10a6:20b:5da::18)
+ by SY5P282MB4512.AUSP282.PROD.OUTLOOK.COM (2603:10c6:10:271::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.36; Tue, 11 Jun
+ 2024 04:13:59 +0000
+Received: from AMS0EPF00000197.eurprd05.prod.outlook.com
+ (2603:10a6:20b:5da:cafe::77) by AS4P192CA0013.outlook.office365.com
+ (2603:10a6:20b:5da::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7656.27 via Frontend
+ Transport; Tue, 11 Jun 2024 04:13:56 +0000
+Authentication-Results: spf=pass (sender IP is 209.85.215.170)
+ smtp.mailfrom=gmail.com; dkim=pass (signature was verified)
+ header.d=gmail.com;dmarc=pass action=none header.from=gmail.com;compauth=pass
+ reason=100
+Received-SPF: Pass (protection.outlook.com: domain of gmail.com designates
+ 209.85.215.170 as permitted sender) receiver=protection.outlook.com;
+ client-ip=209.85.215.170; helo=mail-pg1-f170.google.com; pr=C
+Received: from mail-pg1-f170.google.com (209.85.215.170) by
+ AMS0EPF00000197.mail.protection.outlook.com (10.167.16.219) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.7677.15
+ via Frontend Transport; Tue, 11 Jun 2024 04:13:56 +0000
+X-IncomingTopHeaderMarker:
+ OriginalChecksum:55A9F02148FCC86FBF58D400460D4E9A71CA58AED2BC95BA84651894F79D7EBC;UpperCasedChecksum:C0F61F094A90B08D734DABBE502BC40DA377AA87B73CD2D2C36EDD647A1E98FD;SizeAsReceived:2761;Count:15
+Received: by mail-pg1-f170.google.com with SMTP id 41be03b00d2f7-6570bd6c3d7so2947816a12.0
+        for <meeno2b@outlook.com>; Mon, 10 Jun 2024 21:13:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1718079236; x=1718684036; darn=outlook.com;
+        h=to:from:subject:mime-version:date:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=zghPQl2JvBVd+i4IJS3E9LFMC3+6wlJvgeE8QA0GrwE=;
+        b=BHRiImfNv/zPcPifFODO11AR1Mx4+L3xtVEQ9cOzUhTTCBN7ENyfrDPz4EYM7zK3Us
+         GcmzglLd4+vFCwzuPZYpsHu6uIzPWp2QRfGj9K+CRPvFpE8o397gsQjFjuaDxOCG5Yq4
+         Q4qXMnhq6nVo+f5vzGKlNeIZb8B9xFUU9Pl7NLnK8rwvg2hZT+3QnpnSDvXI1xmLCB3H
+         j/Ys/8Vn+HtXno+EwYxTn0lL1A/obztCtzOUTQNTGbSjHUAoF0yA/Fo17q+xdDYN1DAQ
+         YQA9B46j2NfxXLBnuava56C1TT8qiM3pLW0j/k+wB8olxxF8OZYUcVz9Gtd2f4FHiivd
+         E6kQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1718079236; x=1718684036;
+        h=to:from:subject:mime-version:date:message-id:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=zghPQl2JvBVd+i4IJS3E9LFMC3+6wlJvgeE8QA0GrwE=;
+        b=ATevR55vw6z0oG3Npqwx5GOF0SZkv8msi19EBLGrm2BM4RP4ZAdpHvClAhjYJ4v9jj
+         bxZRjuekDdeNAEusnxr2t1vwZh0mkK8tG7i6ca5pVpAwSmahCTMQx67Ue5BIqYvhB3m0
+         pr/MX0DrfEWe94RPws3c4PiRB9H2rXYkXf2cT3gMuDnTZqcnlfxrryQjc06ovQTvQUA8
+         6Yc8bwwE9Fu39VrHM9EQPcu2XO99kglU3NTcGnZaRdcc0zr6WlyH0x2UZ7r6l0n58wM9
+         6USajfWVp5y0gB4XmfnqzrDpCXMliJouu73P5UDQHz3zI6NjE+92yR6jsqBebP6pWTSw
+         0aeg==
+X-Gm-Message-State: AOJu0Yzx3P64GuINY0QYzniXp/6nd6MfhNjG28g9u4rBSuD2pYah5IrZ
+	ibSvLXgVGq8oue+LQhYDiu2MFo9IUMFWUu+mA3AtDdN0nmNE/NiUkZ5L0Q==
+X-Google-Smtp-Source: AGHT+IFl7hHGGONGmlFY0w4l+dX6qo7BVEe9WL47Jdqdok2WRzC9NPouflwhjzpztJSf99/AuccFYg==
+X-Received: by 2002:a05:6a20:734a:b0:1b8:94a0:4a65 with SMTP id adf61e73a8af0-1b894a05120mr470342637.36.1718079235696;
+        Mon, 10 Jun 2024 21:13:55 -0700 (PDT)
+Return-Path: meenoxiong@gmail.com
+Received: from [192.168.8.105] (pa49-179-34-83.pa.nsw.optusnet.com.au. [49.179.34.83])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1f7327bd397sm2873995ad.278.2024.06.10.21.13.54
+        for <meeno2b@outlook.com>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 10 Jun 2024 21:13:55 -0700 (PDT)
+Message-ID: <6667cf03.170a0220.60fd4.10dd@mx.google.com>
+Date: Mon, 10 Jun 2024 21:13:55 -0700 (PDT)
+Content-Type: multipart/mixed; boundary="===============2111966928541847688=="
+Subject: Security Update on incident-20240611-140712: Detected Individual Has Left the Monitored Area
+From: meenoxiong@gmail.com
+To: meeno2b@outlook.com
+X-IncomingHeaderCount: 15
+X-MS-Exchange-Organization-ExpirationStartTime: 11 Jun 2024 04:13:56.8377
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id:
+ 34f6c62b-10f3-46fc-2fb0-08dc89cce9c9
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic:
+ AMS0EPF00000197:EE_|SY5P282MB4512:EE_|SY4P282MB3827:EE_
+X-MS-Exchange-Organization-AuthSource:
+ AMS0EPF00000197.eurprd05.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-UserLastLogonTime: 6/11/2024 4:11:24 AM
+X-MS-Office365-Filtering-Correlation-Id: 34f6c62b-10f3-46fc-2fb0-08dc89cce9c9
+X-MS-Exchange-EOPDirect: true
+X-Sender-IP: 209.85.215.170
+X-SID-PRA: MEENOXIONG@GMAIL.COM
+X-SID-Result: PASS
+X-MS-Exchange-Organization-PCL: 2
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:0;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jun 2024 04:13:56.7127
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 34f6c62b-10f3-46fc-2fb0-08dc89cce9c9
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-AuthSource:
+ AMS0EPF00000197.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg:
+ 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SY5P282MB4512
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:04.4728520
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.7633.034
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;ex:0;auth:1;dest:I;ENG:(5062000308)(920221119095)(90000117)(920221120095)(90011020)(91015020)(91040095)(9050020)(9060121)(9081003)(9100341)(944500132)(4810010)(4910033)(9930004)(9545005)(10172021)(9320005)(120001);
+X-Message-Delivery: Vj0xLjE7dXM9MDtsPTA7YT0xO0Q9MTtHRD0xO1NDTD0tMQ==
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?6RL6v+N3WeVADVMKaH97Z3VJJCM2/sDZ+qRfquu8LVGP0kilA+viEbZ62SDG?=
+ =?us-ascii?Q?M95tB51mOYYQ06kyw1CR1oyPOsREoGHuXskJx67yoG4KhSqh2eYL5Ho76ayh?=
+ =?us-ascii?Q?+hZK6Td0g5t80hjMyqbYkyEeqwMPhTztyfvqzeK6X+WBgYEC4VPSNZXQ8fS0?=
+ =?us-ascii?Q?oql1+RjX+5xn4wnYFv7utO5PfiUcSUpRR2ei9aC7vgD/QSfW9r9hDt6JbYzF?=
+ =?us-ascii?Q?JVuCi6GPWUBI3vP56+tuPbHhgAtA8sHoH1cV8CdaUep8Zi+vrJACV4YDuUUW?=
+ =?us-ascii?Q?3wxIHwAexkQTVYBmQSYUD33zKV5heQ34ThEU9Y+GZjRVbFvtWH+hhhyBzjcC?=
+ =?us-ascii?Q?wLQqeWD3YeTFeuV7fg+vDaED854GeLfZJ0hjlrvawfKoYxW+ny0B61YXXgo2?=
+ =?us-ascii?Q?cdt2uDgu8GponJ5394LXmMccJyRnX3RUN0PLNyEdTcgMzoXYaE3xGdSlg6YS?=
+ =?us-ascii?Q?+GB7EhaxcyVC4VhXF0lEq64krhZMC69gcwN2mXUOt6kH6MlDoZuZJEr+djpU?=
+ =?us-ascii?Q?gGPF/NwEAlHiONIl6ZkLDgh3WK3uuLhOVu1LFTNPFw2uZZSvpY3y/W4cfi4V?=
+ =?us-ascii?Q?Gphn/sJBfdBlt3sgZOnWBNHcGwmMt3up3VHyuceCE2/mt8jeDiySlciFGa3o?=
+ =?us-ascii?Q?banWZhdr7MKCIczqVW00nyVMEmYE6gjUif9GByn7VP8PJrxKA99/72moh0Hy?=
+ =?us-ascii?Q?J9RZmhHIQVeFHhRthW9C/ILEAgjf32ly99QFO5vvt7m8gBaWFnZIJMm41Xkh?=
+ =?us-ascii?Q?zP08mA69MIWZVVaXZs8r1i1/eV300Ve9kKQiu0vkwZE2AkcMf7J5F5pUCSYA?=
+ =?us-ascii?Q?3kO+n++67+HH9Vntj5GMDCZ6ZkT1Ng5MRPrLNdEF8wEO1bWuBQ7i1Fh9UWDS?=
+ =?us-ascii?Q?zGpTtH3GseYxKWe7swkhheL6cmFRSHDtDJy0GzbXCk0LUsGRNX8Ru6NWrgPG?=
+ =?us-ascii?Q?8CQgMu4cgU1oq5RAioxapqWU+9HmAzVe+ZJHiWlKO5z5FQStWnuk7rmiwU6k?=
+ =?us-ascii?Q?g+250nZ5EJapHtgo3rYaHO4Py5i/9Xn18p5GGdrnQcIl44ZQAcKylnTZ79on?=
+ =?us-ascii?Q?GkBAk/HBpR4DDqCjnl7fCYE1I3kX+i2JATWSBdSq9f0MYD/4LFjFn30vafug?=
+ =?us-ascii?Q?vLdDVTNGpJO0MFTtN/gzEpq+CJ8xoEZcXGjz4aVhFG5QvzHMTY32/WS6R07J?=
+ =?us-ascii?Q?LfxfB7eiSKRJZgcjfFi2+2TWm6qY1rnnG6MNjxkMSrBUwqcNzrTQHQ8wcqFe?=
+ =?us-ascii?Q?4dh4TdrGrqaGcYY8WxSzX0wmF8exJAG1jMZT3w/uO+MdyAxmp+XE1rMT+Rkh?=
+ =?us-ascii?Q?TDlZLlgWb0Eq6JXmyBlDMgOjrj/BdirDU2jvsY65UHmS64R8y+SwalO4chlr?=
+ =?us-ascii?Q?mSsBU290co/n8SBAJGhJU26tqSg64ojgT5VomwTNWgvBagS2AikPpwkljQqQ?=
+ =?us-ascii?Q?f6XU9NtMY83p2EtABx0JiOCRaIG1RD8B1VDvGVfRdkRMcpeEq7AWEMG+bKm3?=
+ =?us-ascii?Q?vUoFgbsDoj4/uDVH5YDmuyG+L3CkC/j0bevxVI6BnQC3ZuwSyrW3Q7DE/jvs?=
+ =?us-ascii?Q?v9q6VGaOXboMc5fILHm+Q1ZNZcnOvmH2McHbHG+K7zcMV4wPRRGwJujhk7hY?=
+ =?us-ascii?Q?TnqBFMM9AKEc+c5i0I9+/SFqQZjvPQjwnfSw25puXAJVVce66RfOkEmm5yP3?=
+ =?us-ascii?Q?zGl+XIyQirHpWeccMs4CkvqCypZ8m018orYw8Z1istmauSsjsmj3bdxGWnLv?=
+ =?us-ascii?Q?8hjjWhMG4G52li6oC4GObzVJGuLtvhGbQWDJrPUbWgqAhVPI5xu/h8VOeiUc?=
+ =?us-ascii?Q?OK3hb+oQvoIalA=3D=3D?=
+MIME-Version: 1.0
+
+--===============2111966928541847688==
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii"></head>
+<body>
+        <p>Dear Customer,</p>
+
+        <p>This is an update from your CCTV monitoring system
+        regarding the recent security alert on your monitored
+        area. The individual detected earlier has now left
+        the monitored area.</p>
+
+        <h3>Incident Details:</h3>
+        <ul><li><strong>Incident ID:</strong> incident-20240611-140712</li>
+            <li><strong>Time of Entry:</strong> Jun 11, 2024, at 02:07:12 PM</li>
+            <li><strong>Time of Exit:</strong> Jun 11, 2024, at 02:13:52 PM</li>
+            <li><strong>Duration of Stay:</strong> 7 minutes</li>
+        </ul>
+
+        <h3>Recommended Action:</h3>
+        <p>Please review this incident to assess the legitimacy
+           of the individual's prolonged presence. If you
+           determine the presence was unauthorized, please contact
+           the security team or the police immediately. If
+           the presence was authorized and poses no threat,
+           no further action is needed.</p>
+
+        <p>Thank you for your attention to this matter.</p>
+
+        <p>Best regards</p>
+        <p>Your Security Camera Monitoring System</p>
+    </body>
+</html>
+
+--===============2111966928541847688==--
