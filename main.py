@@ -77,12 +77,12 @@ class WebCam:
             body = body%(incident_id, entry_time_str, exit_time_str,
                          round((exit_time - entry_time).seconds/60))
         # Set up Email account credentials and SMTP server details
-        sender_email = "meenoxiong@gmail.com"
-        recipient_email = "meeno2b@outlook.com"
+        sender_email = "[SENDER-EMAIL-ADDRESS]"
+        recipient_email = "[RECIPIENT-EMAIL-ADDRESS]"
         # To generate an app password for this program, go to ...
         # ...https://myaccount.google.com/security, search "App Passwords", ...
         # ...and create one
-        sender_password = "gclcitlssbmcavmf"
+        sender_password = "[YOUR-APP-PASSWORD]"
         smtp_server = 'smtp.gmail.com'
         smtp_port = 465    # Port number for SSL
         path_to_attachment = attachment_filename
