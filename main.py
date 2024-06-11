@@ -68,7 +68,7 @@ class WebCam:
             exit_time = datetime.now()
             # Format the exit time to string
             exit_time_str = exit_time.strftime('%b %d, %Y, at %I:%M:%S %p')
-            # Define the email subject line for the security update email
+            # Define the email subject line for the follow-up security update email
             subject = f'Security Update on {incident_id}: Detected Individual Has Left the Monitored Area'
             # Read the content from the template for update emails
             with open('./email-body-templates/update-email-html-body.txt', 'r') as file:
@@ -201,7 +201,7 @@ class WebCam:
                 # Check if an alert email has already been sent for the detected motion
                 if self.alert_email_sent:
                     # Execute the send_email method concurrently in the background to send a ...
-                    # ...security update email that notifies the object has left the monitored area
+                    # ...follow-up security update email informing that the object has left the monitored area
                     self.execute_concurrently_in_background(
                                 target_process=self.send_email,
                                 process_args=(self.entry_time, False, None)
