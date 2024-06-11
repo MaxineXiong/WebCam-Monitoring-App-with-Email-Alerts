@@ -12,6 +12,12 @@ The **WebCam Monitoring App with Email Alerts** is designed to enhance security 
 
 <br>
 
+<p align="center">
+  <img width="400" src="https://github.com/MaxineXiong/WebCam-Monitoring-App-with-Email-Alerts/assets/55864839/176227b7-a799-4811-8937-2679e7ea0e56">
+</p>
+
+<br>
+
 ## Features
 
 - **Real-time Monitoring**: Utilizes webcam technology to monitor designated areas in real time.
