@@ -256,7 +256,7 @@ class WebCam:
 
 
 
-# Main block to execute the program
+# Check if this script is being run directly (and not imported as a module)
 if __name__ == '__main__':
     # Initialize the WebCam object
     camera = WebCam(camera_index=0)
